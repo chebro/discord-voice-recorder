@@ -4,6 +4,15 @@ A tiny [Discord.js](https://discord.js.org/#/) script that can record your voice
 
 <img src="https://i.imgur.com/y6JCNNA.png" width="400" align="center">
 
+### Content
+   * [Installation and Usage](#installation-and-usage)
+      * [Installing](#installing)
+      * [Setting Up the Local Environment](#setting-up-the-local-environment)
+      * [Running the Script](#running-the-script)
+         * [Start Recording](#start-recording)
+         * [Stop Recording](#stop-recording)
+   * [Thanks](#thanks)
+
 ## Installation and Usage
 
 ### Installing
@@ -60,3 +69,7 @@ This will summon the bot into the voice channel mentioned in the arguments and s
 ```
 
 This will remove the bot from the mentioned voice channel and the recording will stop. Note that if you re-summon the bot with the same file name, the new audio will be appended to the end of the provious file.
+
+# Thanks
+
+Also, thanks @eslachance for the gist, which is what this code is based on. https://gist.github.com/eslachance/fb70fc036183b7974d3b9191601846ba.
