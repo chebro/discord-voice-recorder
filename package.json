@@ -1,0 +1,19 @@
+{
+	"name": "discord-voice-recorder",
+	"version": "1.0.0",
+	"description": "A nifty script that can pipe out audio from a voice channel to your local storage.",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"keywords": [],
+	"author": "Sravanth Chebrolu",
+	"license": "MIT",
+	"engines": {
+		"node": "~12.16.1"
+	},
+	"dependencies": {
+		"@discordjs/opus": "^0.3.2",
+		"discord.js": "^12.3.1"
+	}
+}
