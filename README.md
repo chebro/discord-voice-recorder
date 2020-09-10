@@ -5,17 +5,18 @@ A tiny [Discord.js](https://discord.js.org/#/) script that can record your voice
 <img src="https://i.imgur.com/y6JCNNA.png" width="400" align="center">
 
 ### Content
-   * [Installation and Usage](#installation-and-usage)
-      * [Installing](#installing)
-      * [Setting Up the Local Environment](#setting-up-the-local-environment)
-      * [Running the Script](#running-the-script)
-         * [Start Recording](#start-recording)
-         * [Stop Recording](#stop-recording)
-   * [Thanks](#thanks)
+
+-    [Installation and Usage](#installation-and-usage)
+     -    [Installing](#installing)
+     -    [Setting Up the Local Environment](#setting-up-the-local-environment)
+     -    [Running the Script](#running-the-script)
+          -    [Start Recording](#start-recording)
+          -    [Stop Recording](#stop-recording)
+-    [Thanks](#thanks)
 
 ## Installation and Usage
 
-### Installing
+### Installing the Source Code
 
 Download the ZIP file and extract the contents to a folder or just clone the repository to your local storage using this command:
 
@@ -24,6 +25,8 @@ git clone https://github.com/sravanth-chebrolu/discord-voice-recorder/
 ```
 
 After extracting/cloning, run `npm i` to install the dependencies. **Ensure that you create a folder by the name** `recordings` **at the root directory.**
+
+Next head over to the [FFmpeg.org](https://ffmpeg.org/download.html), and download the executables depending on your OS; If you're on Windows ensure sure that you have included the path to the bin folder to your system enviroment PATH variables. Ex: `C:\Programs\ffmpeg\ffmpeg-20200831-4a11a6f-win64-static\bin`.
 
 ### Setting Up the Local Environment
 
@@ -60,7 +63,9 @@ The bot should be online and you can run the bot commands in your discord server
 <PREFIX>enter <VOICE_CHANNEL_NAME> <AUDIO_FILE_NAME>
 ```
 
-This will summon the bot into the voice channel mentioned in the arguments and start recording the audio, the audio will be saved to `~/recordings/AUDIO_FILE_NAME.pcm`.
+This will summon the bot into the voice channel mentioned in the arguments and start recording the audio. You will hear a 'ding' when you run the command indicating that the connection has been established. If you don't hear the 'ding', there's a problem with the ffmpeg installation. Keep in mind that the audio will be recorded in the [PCM format](https://en.wikipedia.org/wiki/Pulse-code_modulation) and will be saved to `~/recordings/AUDIO_FILE_NAME.pcm`.
+
+> To work with PCM audio, you could use software such as [Audacity](https://www.audacityteam.org/). To import the audio into Audacity, open File > Import > Raw Data... and then select your audio file. You should select Signed 16-bit PCM as the encoding, a Little-endian byte order, 2 Channels (Stereo) and a sample rate of 48000Hz.
 
 #### Stop Recording
 
