@@ -11,7 +11,7 @@ const appendChunkToFile = (fileName) => {
 
 client.on('message', msg => {
     if (msg.content.startsWith(config.PREFIX)) {
-        const commandBody = msg.content.split(config.PREFIX)[1].split(' ');
+        const commandBody = msg.content.substring(config.PREFIX.length).split(' ');
         const channelName = commandBody[1];
 
         if (commandBody[0] === ('enter') && commandBody[1] && commandBody[2]) {
@@ -23,7 +23,12 @@ client.on('message', msg => {
             console.log(`Sliding into ${voiceChannel.name}...`);
             voiceChannel.join()
                 .then(conn => {
+
+                    const dispatcher = conn.play('./sounds/ding.mp3');
+                    dispatcher.on('start', () => { console.log('ding.mp3 is playing..'); });
+                    dispatcher.on('finish', () => { console.log('ding.mp3 has finished playing..'); });
                     console.log(`Joined ${voiceChannel.name}!\n\nREADY TO RECORD\n`);
+
                     const receiver = conn.receiver;
                     conn.on('speaking', (user, speaking) => {
                         if (speaking) {
