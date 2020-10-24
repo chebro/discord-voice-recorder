@@ -1,12 +1,12 @@
-const Discord = require("discord.js");
+const Discord = require('discord.js');
 const client = new Discord.Client();
 
 const fs = require('fs');
 const config = require('./config.json');
 
-const appendChunkToFile = (fileName) => {
-    const pathToFile = __dirname + `/recordings/${fileName}.pcm`;
-    return fs.createWriteStream(pathToFile, { flags: 'a' });
+const createNewChunk = () => {
+    const pathToFile = __dirname + `/recordings/${Date.now()}.pcm`;
+    return fs.createWriteStream(pathToFile);
 };
 
 client.on('message', msg => {
@@ -14,7 +14,7 @@ client.on('message', msg => {
         const commandBody = msg.content.substring(config.PREFIX.length).split(' ');
         const channelName = commandBody[1];
 
-        if (commandBody[0] === ('enter') && commandBody[1] && commandBody[2]) {
+        if (commandBody[0] === ('enter') && commandBody[1]) {
             const voiceChannel = msg.guild.channels.cache.find(channel => channel.name === channelName);
 
             if (!voiceChannel || voiceChannel.type !== 'voice')
@@ -34,7 +34,7 @@ client.on('message', msg => {
                         if (speaking) {
                             console.log(`${user.username} started speaking`);
                             const audioStream = receiver.createStream(user, { mode: 'pcm' });
-                            audioStream.pipe(appendChunkToFile(commandBody[2]));
+                            audioStream.pipe(createNewChunk());
                             audioStream.on('end', () => { console.log(`${user.username} stopped speaking`); });
                         }
                     });
@@ -43,9 +43,14 @@ client.on('message', msg => {
         }
         if (commandBody[0] === ('exit') && commandBody[1]) {
             const voiceChannel = msg.guild.channels.cache.find(channel => channel.name === channelName);
-            console.log(`Slipping out of ${voiceChannel.name}...`);
-            voiceChannel.leave();
-            console.log(`\nSTOPPED RECORDING\n`);
+            if (!voiceChannel || voiceChannel.type !== 'voice') {
+                return msg.reply(`The channel #${channelName} doesn't exist or isn't a voice channel.`);
+            }
+            else {
+                voiceChannel.leave();
+                console.log(`Slipping out of ${voiceChannel.name}...`);
+                console.log(`\nSTOPPED RECORDING\n`);
+            }
         }
     }
 });
