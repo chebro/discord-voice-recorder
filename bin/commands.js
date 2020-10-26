@@ -15,7 +15,7 @@ exports.enter = function(msg, channelName) {
     voiceChannel.join()
         .then(conn => {
 
-            const dispatcher = conn.play('../sounds/drop.mp3');
+            const dispatcher = conn.play(__dirname + '/../sounds/drop.mp3');
             dispatcher.on('finish', () => { console.log(`Joined ${voiceChannel.name}!\n\nREADY TO RECORD\n`); });
 
             const receiver = conn.receiver;
@@ -39,7 +39,7 @@ exports.exit = function(msg, channelName) {
 
     voiceChannel.join()
         .then(conn => {
-            const dispatcher = conn.play('../sounds/badumtss.mp3', { volume: 0.45 });
+            const dispatcher = conn.play(__dirname + '/../sounds/badumtss.mp3', { volume: 0.45 });
             dispatcher.on('finish', () => {
                 voiceChannel.leave();
                 console.log(`\nSTOPPED RECORDING\n`);
