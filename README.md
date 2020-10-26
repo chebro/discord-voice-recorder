@@ -72,7 +72,7 @@ The bot should be online and you can run the bot commands in your discord server
 #### Stop Recording
 
 ```
-<PREFIX>exit <VOICE_CHANNEL_NAME>
+<PREFIX>exit
 ```
 
 ### Managing the Output
