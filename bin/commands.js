@@ -31,19 +31,23 @@ exports.enter = function(msg, channelName) {
         .catch(err => { throw err; });
 }
 
-exports.exit = function(msg, channelName) {
-    const voiceChannel = msg.guild.channels.cache.find(channel => channel.name === channelName);
+exports.exit = function (msg) {
+    // Use optional chaining when we upgrade to Node 14.
+    if (
+        !(
+            msg &&
+            msg.guild &&
+            msg.guild.voice &&
+            msg.guild.voice.channel &&
+            msg.guild.voice.connection
+        )
+    )
+        return;
 
-    if (!voiceChannel || voiceChannel.type !== 'voice')
-        return msg.reply(`The channel #${channelName} doesn't exist or isn't a voice channel.`);
-
-    voiceChannel.join()
-        .then(conn => {
-            const dispatcher = conn.play(__dirname + '/../sounds/badumtss.mp3', { volume: 0.45 });
-            dispatcher.on('finish', () => {
-                voiceChannel.leave();
-                console.log(`\nSTOPPED RECORDING\n`);
-            });
-        });
-
-}
+    const { channel: voiceChannel, connection: conn } = msg.guild.voice;
+    const dispatcher = conn.play(__dirname + "/../sounds/badumtss.mp3", { volume: 0.45 });
+    dispatcher.on("finish", () => {
+        voiceChannel.leave();
+        console.log(`\nSTOPPED RECORDING\n`);
+    });
+};

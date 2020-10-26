@@ -10,7 +10,7 @@ client.on('message', msg => {
         const channelName = commandBody[1];
 
         if (commandBody[0] === ('enter') && commandBody[1]) commands.enter(msg, channelName);
-        if (commandBody[0] === ('exit') && commandBody[1]) commands.exit(msg, channelName);
+        if (commandBody[0] === ('exit')) commands.exit(msg);
     }
 });
 
