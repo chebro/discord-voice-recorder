@@ -1,10 +1,12 @@
 # Discord Voice Recorder
 
-A tiny [Discord.js](https://discord.js.org/#/) script that can record discord voice calls. Just summon the bot and to the voice channel and record a multi-user call! Jump to [Installation & Usage](https://github.com/sravanth-chebrolu/discord-voice-recorder#installation-and-usage) to learn how to run the script and save the audio to your local device.
+A [Discord.js](https://discord.js.org/#/) script that can record discord voice calls. Summon a bot running this script to a voice channel to record a multi-user call, and save the recording locally!
+
+Jump to [Installation & Usage](https://github.com/sravanth-chebrolu/discord-voice-recorder#installation-and-usage) to get started.
 
 <img src="https://i.imgur.com/y6JCNNA.png" width="400" align="center">
 
-### Content
+### Index
 
 -    [Installation and Usage](#installation-and-usage)
      -    [Download the Source and Install FFmpeg](#download-the-source-and-install-ffmpeg)
@@ -65,15 +67,13 @@ The bot should be online and you can run the bot commands in your discord server
 <PREFIX>enter <VOICE_CHANNEL_NAME>
 ```
 
-This will summon the bot into the voice channel mentioned in the arguments and start recording the audio. You should hear a 'drop' sound when you run the command indicating that the connection has been established. If you don't hear the sound, there's a problem with the ffmpeg installation. 
+**Note:** You should hear a 'drop' sound when you run the command indicating that the connection has been established. If you don't hear the sound, there's a problem with your ffmpeg installation. 
 
 #### Stop Recording
 
 ```
 <PREFIX>exit <VOICE_CHANNEL_NAME>
 ```
-
-This will remove the bot from the mentioned voice channel and the recording will stop. 
 
 ### Managing the Output
 
@@ -83,21 +83,23 @@ Keep in mind that the audio will be recorded in the [PCM format](https://en.wiki
 
 #### Merge Recording
 
+The output is saved as a seperate file for each audio stream, and is named with the timestamp at which it was created. To merge all output files, run:
 ```
 node ./bin/merge.js
 ``` 
 
-This will generate a merged output of all the individual PCM output files to a `merge.pcm` file in the `recordings` directory.
+This will pipe data from the individual PCM files to a `merge.pcm` file in the `recordings` directory.
+
+**IMPORTANT:** Do not forget to empty your `recordings` folder after each recording session. Running `./bin/merge.js` without deleting a previously created `merge.pcm` will make bad things happen. This will be fixed later.
 
 #### Convert the Merged File to MP3
 
-Since FFmpeg is a dependency, we can use it to convert the raw `.pcm` file to a more user friendly `.mp3` format, mentioned in #3 this can be done using:
+Since FFmpeg is a dependency, we can use it to convert the raw `.pcm` file to a more user friendly `.mp3` format, mentioned in issue [#3](https://github.com/sravanth-chebrolu/discord-voice-recorder/issues/3) this can be done using:
 
 ```
 ffmpeg -f s16le -ar 44.1k -ac 2 -i merge.pcm output.mp3
 ```
 
-
 # Thanks
 
-Also, thanks @eslachance for the gist, which is what this code is based on. https://gist.github.com/eslachance/fb70fc036183b7974d3b9191601846ba.
+Also, huge thanks to [@eslachance](https://github.com/eslachance) for the gist, which is what this repo is based on. https://gist.github.com/eslachance/fb70fc036183b7974d3b9191601846ba.
