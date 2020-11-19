@@ -7,7 +7,7 @@
 		"start": "node index.js"
 	},
 	"keywords": [],
-	"author": "Sravanth Chebrolu",
+	"author": "Sravanth C.",
 	"license": "MIT",
 	"engines": {
 		"node": "~12.16.1"

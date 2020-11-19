@@ -2,7 +2,7 @@
 
 A [Discord.js](https://discord.js.org/#/) script which can record voice calls. Summon the bot to a voice channel, and voilà! the audio is piped right into your local machine.
 
-Jump to [Installation & Usage](https://github.com/sravanth-chebrolu/discord-voice-recorder#installation-and-usage) to get started.
+Jump to [Installation & Usage](https://github.com/chebro/discord-voice-recorder#installation-and-usage) to get started.
 
 _Recording voice calls without prior consent violates privacy. Do not use this bot without approval. I'm not responsible for your insanity._
 
@@ -22,7 +22,7 @@ _Recording voice calls without prior consent violates privacy. Do not use this b
 
 Clone the repository : 
 ```
-git clone https://github.com/sravanth-chebrolu/discord-voice-recorder/
+git clone https://github.com/chebro/discord-voice-recorder/
 ```
 
 Run `npm i` to download necessary `node_modules`. Then, head over to the [FFmpeg.org](https://ffmpeg.org/download.html), and download executables for your OS; If you're on Windows, double-check if the FFmpeg bin is on your path.
@@ -79,7 +79,7 @@ This creates a `merge.pcm` in the `/recordings` directory.
 
 ### Convert the Merged File to MP3
 
-As mentioned in issue [#3](https://github.com/sravanth-chebrolu/discord-voice-recorder/issues/3), to convert pcm to mp3, run:
+As mentioned in issue [#3](https://github.com/chebro/discord-voice-recorder/issues/3), to convert pcm to mp3, run:
 
 ```
 ffmpeg -f s16le -ar 44.1k -ac 2 -i merge.pcm output.mp3
