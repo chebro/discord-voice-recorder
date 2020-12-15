@@ -11,8 +11,6 @@ _Recording voice calls without prior consent violates privacy. Do not use this b
 -    [Installation and Usage](#installation-and-usage)
      -    [Setting Up the Local Environment](#setting-up-the-local-environment)
      -    [Running the Script](#running-the-script)
-          -    [Start Recording](#start-recording)
-          -    [Stop Recording](#stop-recording)
 -    [Managing the Output](#managing-the-output)
      -    [Merge Recording](#merge-recording)
      -    [Convert the Merged File to MP3](#convert-the-merged-file-to-mp3)
