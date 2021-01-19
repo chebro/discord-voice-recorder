@@ -24,9 +24,9 @@ Clone the repository :
 git clone https://github.com/chebro/discord-voice-recorder/
 ```
 
-[Create a discord bot](https://discordpy.readthedocs.io/en/latest/discord.html). Invite the bot to your server, then:
+[Make a discord bot](https://discordpy.readthedocs.io/en/latest/discord.html) if you don't have one already and invite the bot to your server, then:
 
-1. Create a `config.json` file and a `recordings` folder at the root folder.
+1. Create `config.json` file and a `/recordings` directory at the root folder.
 2. Paste the bot token (from [developer window](https://discord.com/developers/applications)) and any bot prefix into `config.json`, like so:
 
 ```yaml
@@ -36,21 +36,21 @@ git clone https://github.com/chebro/discord-voice-recorder/
 }
 ```
 
-You can run the bot in any one of the following two ways.
+You can now run the script in one of the following two ways:
 
-### Running the Script Locally
+### Run Locally
 
 Run `npm i` to download necessary `node_modules`, then run `npm start`, the bot should be online.
 
 ### Run as a Docker Container
 
-1. Build the docker image 
+1. Build the docker image: 
 
 ```
 docker build -t dvr .
 ```
 
-2. Bind `/recordings` directory on host to container and start the container with a custom name.
+2. Bind `/recordings` directory on host to container and start the container with a custom name:
 
 ```
 docker run \          
