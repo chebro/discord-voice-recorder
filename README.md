@@ -6,16 +6,16 @@ A [Discord.js](https://discord.js.org/#/) script which can record voice calls. S
 
 ### Index
 -    [Installation and Usage](#installation-and-usage)
-
      -    [Run Locally](#run-locally)     
 	 -	  [Run in Container](#run-in-container)
 	 -	  [Bot Commands](#bot-commands)
-	 
 -    [Managing the Output](#managing-the-output)
      -    [Merge Recording](#merge-recording)
      -    [Convert the Merged File to MP3](#convert-the-merged-file-to-mp3)
 
 _**Note:** Recording voice calls without prior consent violates privacy. Do not use this bot without approval. I'm not responsible for your insanity._
+
+_Also, multi user recording is currently out of discord.js's scope, currently a unique stream is created for every user, but the end result is a very bad audio output, [more info](https://discordjs.guide/voice/receiving-audio.html#what-if-i-want-to-listen-to-multiple-users)._
 
 ## Installation and Usage
 
