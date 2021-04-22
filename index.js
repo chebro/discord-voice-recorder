@@ -7,9 +7,9 @@ const commands = require(`./bin/commands`);
 client.on('message', msg => {
     if (msg.content.startsWith(config.PREFIX)) {
         const commandBody = msg.content.substring(config.PREFIX.length).split(' ');
-        const channelName = commandBody[1];
+        const channelName = commandBody.slice(1).join(" ");
 
-        if (commandBody[0] === ('enter') && commandBody[1]) commands.enter(msg, channelName);
+        if (commandBody[0].startsWith('enter')) commands.enter(msg, channelName);
         if (commandBody[0] === ('exit')) commands.exit(msg);
     }
 });
