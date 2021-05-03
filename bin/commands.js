@@ -11,17 +11,18 @@ exports.enter = function(msg, channelName) {
         console.log(c);
     })
     const voiceChannel = msg.guild.channels.cache.find(channel => channel.name.toLowerCase() === channelName);
-
+    
+    //if there is no voice channel at all or the channel is not voice or stage
     if (!voiceChannel || (voiceChannel.type !== 'voice' && voiceChannel.type !== 'stage'))
         return msg.reply(`The channel #${channelName} doesn't exist or isn't a voice channel.`);
-
+    
     console.log(`Sliding into ${voiceChannel.name} ...`);
     voiceChannel.join()
         .then(conn => {
-
+            
             const dispatcher = conn.play(__dirname + '/../sounds/drop.mp3');
             dispatcher.on('finish', () => { console.log(`Joined ${voiceChannel.name}!\n\nREADY TO RECORD\n`); });
-
+            
             const receiver = conn.receiver;
             conn.on('speaking', (user, speaking) => {
                 if (speaking) {
