@@ -6,7 +6,8 @@ const createNewChunk = () => {
 };
 
 exports.enter = function(msg, channelName) {
-    const voiceChannel = msg.guild.channels.cache.find(channel => channel.name === channelName);
+    channelName = channelName.toLowerCase();
+    const voiceChannel = msg.guild.channels.cache.find(channel => channel.name.toLowerCase() === channelName);
 
     if (!voiceChannel || voiceChannel.type !== 'voice')
         return msg.reply(`The channel #${channelName} doesn't exist or isn't a voice channel.`);
