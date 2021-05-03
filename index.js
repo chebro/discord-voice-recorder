@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+const fs = require("fs");
+
 const config = require('./config.json');
 const commands = require(`./bin/commands`);
 
@@ -10,6 +12,11 @@ if(!config.PREFIX || !config.BOT_TOKEN) {
     console.error("Make sure there are no spelling mistakes.");
     process.exit(1);
 }
+
+//create the recordings directory in case people forget to do so
+try {
+    fs.mkdirSync("./recordings/");
+} catch(ignored) {}
 
 client.on('message', msg => {
     if (msg.content.startsWith(config.PREFIX)) {
