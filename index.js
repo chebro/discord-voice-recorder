@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client(
+    {intents: ["GUILD_MESSAGES", "GUILD_VOICE_STATES", "GUILDS"]}
+);
 
 const fs = require("fs");
 
