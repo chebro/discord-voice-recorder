@@ -7,10 +7,11 @@ const createNewChunk = () => {
 
 exports.enter = function(msg, channelName) {
     channelName = channelName.toLowerCase();
-    msg.guild.channels.cache.forEach(c => {
-        console.log(c);
-    })
-    const voiceChannel = msg.guild.channels.cache.find(channel => channel.name.toLowerCase() === channelName);
+    
+    //filter out all channels that aren't voice or stage
+    const voiceChannel = msg.guild.channels.cache
+                            .filter(c => c.type === "voice" || c.type === "stage")
+                            .find(channel => channel.name.toLowerCase() === channelName);
     
     //if there is no voice channel at all or the channel is not voice or stage
     if (!voiceChannel || (voiceChannel.type !== 'voice' && voiceChannel.type !== 'stage'))
