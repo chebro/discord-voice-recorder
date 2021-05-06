@@ -3,8 +3,6 @@ const client = new Discord.Client(
     {intents: ["GUILD_MESSAGES", "GUILD_VOICE_STATES", "GUILDS"]}
 );
 
-const fs = require("fs");
-
 const config = require('./config.json');
 const commands = require(`./bin/commands`);
 
@@ -15,16 +13,11 @@ if(!config.PREFIX || !config.BOT_TOKEN) {
     process.exit(1);
 }
 
-//create the recordings directory in case people forget to do so
-try {
-    fs.mkdirSync("./recordings/");
-} catch(ignored) {}
-
 client.on('message', msg => {
     if (msg.content.startsWith(config.PREFIX)) {
         const commandBody = msg.content.substring(config.PREFIX.length).split(' ');
         const channelName = commandBody[1];
-
+        
         if (commandBody[0] === ('enter') && commandBody[1]) commands.enter(msg, channelName);
         if (commandBody[0] === ('exit')) commands.exit(msg);
     }
