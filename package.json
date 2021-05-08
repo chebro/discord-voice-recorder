@@ -14,7 +14,7 @@
 	},
 	"dependencies": {
 		"@discordjs/opus": "^0.3.2",
-		"discord.js": "^12.3.1",
+		"discord.js": "github:discordjs/discord.js#af00ec8970e77ea8a0afd21571eeeef9c554e1ec",
 		"ffmpeg-static": "^4.2.7"
 	}
 }

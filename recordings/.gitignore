@@ -1,0 +1,5 @@
+
+# ignore audio-type files
+*.pcm
+*.mp3
+*.opus

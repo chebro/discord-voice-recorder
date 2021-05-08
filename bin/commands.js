@@ -6,18 +6,24 @@ const createNewChunk = () => {
 };
 
 exports.enter = function(msg, channelName) {
-    const voiceChannel = msg.guild.channels.cache.find(channel => channel.name === channelName);
-
-    if (!voiceChannel || voiceChannel.type !== 'voice')
+    channelName = channelName.toLowerCase();
+    
+    //filter out all channels that aren't voice or stage
+    const voiceChannel = msg.guild.channels.cache
+                            .filter(c => c.type === "voice" || c.type === "stage")
+                            .find(channel => channel.name.toLowerCase() === channelName);
+    
+    //if there is no voice channel at all or the channel is not voice or stage
+    if (!voiceChannel || (voiceChannel.type !== 'voice' && voiceChannel.type !== 'stage'))
         return msg.reply(`The channel #${channelName} doesn't exist or isn't a voice channel.`);
-
+    
     console.log(`Sliding into ${voiceChannel.name} ...`);
     voiceChannel.join()
         .then(conn => {
-
+            
             const dispatcher = conn.play(__dirname + '/../sounds/drop.mp3');
             dispatcher.on('finish', () => { console.log(`Joined ${voiceChannel.name}!\n\nREADY TO RECORD\n`); });
-
+            
             const receiver = conn.receiver;
             conn.on('speaking', (user, speaking) => {
                 if (speaking) {
@@ -32,19 +38,13 @@ exports.enter = function(msg, channelName) {
 }
 
 exports.exit = function (msg) {
-    // Use optional chaining when we upgrade to Node 14.
-    if (
-        !(
-            msg &&
-            msg.guild &&
-            msg.guild.voice &&
-            msg.guild.voice.channel &&
-            msg.guild.voice.connection
-        )
-    )
+    //check to see if the voice cache has any connections and if there is
+    //no ongoing connection (there shouldn't be undef issues with this).
+    if(msg.guild.voiceStates.cache.filter(a => a.connection !== null).size !== 1)
         return;
-
-    const { channel: voiceChannel, connection: conn } = msg.guild.voice;
+    
+    //make sure it's .last() not .first().  some discord js magic going on rn
+    const { channel: voiceChannel, connection: conn } = msg.guild.voiceStates.cache.last();
     const dispatcher = conn.play(__dirname + "/../sounds/badumtss.mp3", { volume: 0.45 });
     dispatcher.on("finish", () => {
         voiceChannel.leave();
